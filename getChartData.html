@@ -50,37 +50,8 @@
 				})
 				dstArray.push(itemArray.join("\t"));
 			})
-			
-			
-
-
-
-			// var dstArray = []
-			// var srcArray = text.split("\n");
-			// $.each(srcArray, function(index, item) {
-			// 	dstArray.push(changeItem(item));
-			// })
 			return dstArray.join("\n");
 		}
 
-		function changeItem(text) {
-			var result = text;
-			var re = /\s\d/g
-			var reArray = text.match(re);
-			if (reArray == null || reArray.length < 1) {
-				return result;
-			}
-			var index = text.indexOf(reArray[0]);
-			var head = text.substr(0, index);
-			var tail = text.substr(index + 1);
-			tail = dealNumStr(tail)
-			result = head + "\t" + tail;
-			return result;
-		}
-
-		function dealNumStr(numStr) {
-			numStr = numStr.replace(/\s+/g, "\t");
-			return numStr;
-		}
 	</script>
 </html>
