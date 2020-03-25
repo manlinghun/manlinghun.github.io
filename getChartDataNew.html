@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			textarea{height: 300px;width: 98%;}
+		</style>
+	</head>
+	<body>
+		<h2>将折线图请求换成Excel能识别的数据</h2>
+		<textarea id="srcText"></textarea></br>
+		</br>
+		<button id="changeBtn">转换</button>
+		</br>
+		<textarea id="dstText"></textarea>
+		<div hidden="hidden" id="optBox"></div>
+	</body>
+	<script src="js/jquery.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		var testData =
+			'[{"symbol":"LVX50","data":[{"date":1569279600000,"value":347.75},{"date":1569366000000,"value":347.65},{"date":1569452400000,"value":347.92},{"date":1569538800000,"value":347.99},{"date":1569798000000,"value":348.62},{"date":1569884400000,"value":348.61},{"date":1569970800000,"value":348.87},{"date":1570057200000,"value":348.71},{"date":1570143600000,"value":349.45},{"date":1570402800000,"value":349.45},{"date":1570489200000,"value":349.26},{"date":1570575600000,"value":349.38},{"date":1570662000000,"value":348.34},{"date":1570748400000,"value":347.38},{"date":1571007600000,"value":346.95},{"date":1571094000000,"value":346.75},{"date":1571180400000,"value":345.95},{"date":1571266800000,"value":345.72},{"date":1571353200000,"value":345.31},{"date":1571612400000,"value":343.48},{"date":1571698800000,"value":342.81},{"date":1571785200000,"value":343.36},{"date":1571871600000,"value":343.73},{"date":1571958000000,"value":344.09},{"date":1572220800000,"value":343.67},{"date":1572307200000,"value":343.72},{"date":1572393600000,"value":343.08},{"date":1572480000000,"value":343.08},{"date":1572566400000,"value":343.62},{"date":1572825600000,"value":342.99},{"date":1572912000000,"value":342.62},{"date":1572998400000,"value":342.62},{"date":1573084800000,"value":342.33},{"date":1573171200000,"value":341.9},{"date":1573430400000,"value":340.23},{"date":1573516800000,"value":340.57},{"date":1573603200000,"value":339.53},{"date":1573689600000,"value":339.39},{"date":1573776000000,"value":339.18},{"date":1574035200000,"value":338.83},{"date":1574121600000,"value":338.23},{"date":1574208000000,"value":338.7},{"date":1574294400000,"value":337.78},{"date":1574380800000,"value":338.2},{"date":1574640000000,"value":338.06},{"date":1574726400000,"value":337.58},{"date":1574812800000,"value":337.99},{"date":1574899200000,"value":337.65},{"date":1575072000000,"value":337.65},{"date":1575244800000,"value":337.97},{"date":1575331200000,"value":337.38},{"date":1575417600000,"value":336.28},{"date":1575590400000,"value":336.09},{"date":1575849600000,"value":334.91},{"date":1575936000000,"value":334.76},{"date":1576022400000,"value":334.61},{"date":1576108800000,"value":334.7},{"date":1576454400000,"value":333.19},{"date":1576627200000,"value":334.04},{"date":1576713600000,"value":333.12},{"date":1577059200000,"value":334.77},{"date":1577145600000,"value":334.72},{"date":1577664000000,"value":335.06},{"date":1577750400000,"value":335.06},{"date":1577923200000,"value":335.4},{"date":1578009600000,"value":335.58},{"date":1578268800000,"value":335.89},{"date":1578355200000,"value":335.36},{"date":1578528000000,"value":335.09},{"date":1578614400000,"value":334.88},{"date":1578873600000,"value":335.06},{"date":1578960000000,"value":335.06},{"date":1579046400000,"value":334.8},{"date":1579132800000,"value":334.9},{"date":1579219200000,"value":335.85},{"date":1579478400000,"value":335.42},{"date":1579564800000,"value":335.88},{"date":1579651200000,"value":335.01},{"date":1579737600000,"value":334.79},{"date":1579824000000,"value":334.9},{"date":1580083200000,"value":334.71},{"date":1580169600000,"value":334.46},{"date":1580256000000,"value":334.04},{"date":1580428800000,"value":334.04},{"date":1580860800000,"value":333.36},{"date":1580947200000,"value":333.64},{"date":1581033600000,"value":333.67},{"date":1581292800000,"value":332.77},{"date":1581379200000,"value":331.86},{"date":1581465600000,"value":331.56},{"date":1581552000000,"value":330.31},{"date":1581638400000,"value":329.92},{"date":1581897600000,"value":329.74},{"date":1581984000000,"value":329.13},{"date":1582070400000,"value":328.59},{"date":1582156800000,"value":329.86},{"date":1582502400000,"value":328.46},{"date":1582588800000,"value":327.87},{"date":1582675200000,"value":327.87},{"date":1582761600000,"value":328.8},{"date":1582848000000,"value":328.35},{"date":1582934400000,"value":328.35},{"date":1583107200000,"value":329.39},{"date":1583366400000,"value":327.79},{"date":1583452800000,"value":327.7},{"date":1583712000000,"value":325.88},{"date":1583798400000,"value":326.6},{"date":1584057600000,"value":325.16},{"date":1584403200000,"value":323.53},{"date":1584489600000,"value":322.95},{"date":1584576000000,"value":323.49},{"date":1584921600000,"value":325.04}],"color":"#870032","name":"Liv-ex Fine Wine 50","index":0,"id":18,"shortName":"Liv-ex Fine Wine 50"}]';
+		var srcText = "";
+		var dstText = "";
+		var defSrcUrl = "https://web.liv-ex.com/fusionchartxmldata.do?_1585111071089=undefined&rebase=0&rotateLabel=1&series=1%7C20&showLegend=0&timescale=0%7C60&type=none&colors=870032&startTime=1427258271091&endTime=1585111071091" ;
+		$(function() {
+			$("#srcText").val(testData);
+			$("#changeBtn").on("click", function() {
+				srcText = $("#srcText").val();
+				dstText = changeData(srcText.trim());
+				$("#dstText").val(dstText);
+			});
+		})
+
+		function changeData(text) {
+			var resultArray = [];
+			var dstJsonArray = JSON.parse(text);
+			var dataArray = dstJsonArray[0]["data"];
+			$.each(dataArray,function(index,item){
+				var date =formatDate(item["date"]);
+				var value = item["value"];
+				resultArray.push(date+"\t"+value);
+			})
+			return resultArray.join("\n");
+		}
+
+		function formatDate(date) { 
+			var now = new Date(date);
+		     var year=now.getFullYear(); 
+		     var month=now.getMonth()+1; 
+		     var date=now.getDate(); 
+		     var hour=now.getHours(); 
+		     var minute=now.getMinutes(); 
+		     var second=now.getSeconds(); 
+		     return year+"-"+month+"-"+date; 
+		} 
+		
+	</script>
+</html>

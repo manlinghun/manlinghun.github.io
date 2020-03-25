@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			textarea{width: 28%;height: 600px;}
+		</style>
+	</head>
+	<body>
+		<input id="urlInput" type="text" style="width: 500px;"/>
+		<button id="getDateBtn">获取数据</button></br>
+		<iframe id="dataIframe" style="width: 28%;height: 600px;" src=""></iframe>
+		<textarea id="resultBox_Org"></textarea>
+		<textarea id="resultBox_excel"></textarea>
+	</body>
+	<script src="js/jquery.js" type="text/javascript"></script> 
+	<script type="text/javascript">
+		
+		$(function() {
+			$("#urlInput").val('http://app.xinhua08.com/tags.php?tag=%E4%B8%80%E6%8F%BD%E5%AD%90%E5%8E%9F%E6%B2%B9%E4%BB%B7%E6%A0%BC%E5%8F%98%E5%8C%96%E7%8E%87&page=1')
+			$("#getDateBtn").on("click", function() {
+				var urlStr = $("#urlInput").val();
+				$("#dataIframe").attr("src",urlStr.trim());
+				document.getElementById("dataIframe").onload = function () {
+					var $mainContent = $("#dataIframe").contents().find(".mainContent");
+					$("#resultBox_Org").val($mainContent.html())
+				}
+			});
+		})
+	
+	</script>
+	<script language="php">
+	    echo file_get_contents("'http://app.xinhua08.com/tags.php?tag=%E4%B8%80%E6%8F%BD%E5%AD%90%E5%8E%9F%E6%B2%B9%E4%BB%B7%E6%A0%BC%E5%8F%98%E5%8C%96%E7%8E%87&page=1'");
+	</script>
+</html>
