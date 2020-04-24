@@ -30,14 +30,14 @@
                     <span class="say">亲爱的baby，遇见你是我一生最大的幸福，</span><br>
                     <span class="say">转眼间九年过去了，</span><br>
                     <span class="say">感谢你这么多年的陪伴。</span><br>
-                    <span class="say">我庆幸这一生能够与你一起走过，</span><br>
+                    <span class="say">我庆幸余生能够与你一起走过，</span><br>
                     <span class="say">我期待与你慢慢变老</span><br>
                     <span class="say">等我们老到头发花白</span><br>
-                    <span class="say">老到哪儿也去不了</span><br>
+                    <span class="say">老到哪儿也去不了，相依在一起的时候</span><br>
                     <span class="say">还能满载着一生的幸福快乐 ！</span><br>
                     <br>
                     <span class="say">我会努力为我们的未来撑起一片天空，</span><br>
-                    <span class="say">我愿意为你去做每一件能让你开心快乐的事，</span><br>
+					<span class="say">我会努力给你带去更多的幸福与快乐，</span><br>
                     <span class="say">相信我们的未来会一天天更加美好。</span><br>
                     <span class="say">亲爱的baby，我爱你</span><br>
                     <span class="say">我会爱你直到老去！</span><br>
@@ -46,17 +46,14 @@
                 </div>
             </div>
             <div id="clock-box">
-                <a href="http://blog.csdn.net/wuxia2001" target="_blank">@大毛</a> 与 <a
-                    href="http://blog.csdn.net/wuxia2001" target="_blank">@二丫</a> 在一起的
+                <a href="#" target="_blank">@大毛</a> 与 <a
+                    href="#" target="_blank">@二丫</a> 在一起的
                 <div id="clock"></div>
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
         <audio src="love.mp3" autoplay="autoplay"></audio>
     </div>
-
-    <script>
-    </script>
 
     <script>
         (function () {
@@ -187,6 +184,17 @@
                 }
             }));
 
+
+            var loadImg = eval(Jscex.compile("async", function () {
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                var img = new Image();
+                img.src = "http://images.17173.com/2010/newgame/2010/07/08/allan07081500_11s.jpg";
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0);
+                }
+            }));
+
             var textAnimate = eval(Jscex.compile("async", function () {
                 var together = new Date();
                 together.setFullYear(2011, 4, 25);
@@ -208,14 +216,18 @@
                 $await(growAnimate());
                 $await(flowAnimate());
                 $await(moveAnimate());
-
                 textAnimate().start();
-
                 $await(jumpAnimate());
             }));
 
             runAsync().start();
+
         })();
+
+
+
+
+
     </script>
 
 
